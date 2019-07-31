@@ -61,7 +61,6 @@ class ViewController: UIViewController {
         picturesTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
 
     }
-
 }
 
 

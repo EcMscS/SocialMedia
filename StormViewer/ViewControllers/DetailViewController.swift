@@ -41,11 +41,14 @@ class DetailViewController: UIViewController {
         navigationController?.hidesBarsOnTap = false
     }
 
-    func setupNavigationBar() {
+    private func setupNavigationBar() {
         navigationItem.title = selectedImage
+        
+        //Add Navigation Right BarButton Item - Action Button
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
     }
 
-    func setupContraints() {
+    private func setupContraints() {
 
         view.addSubview(displayedImageView)
 
@@ -55,5 +58,18 @@ class DetailViewController: UIViewController {
         displayedImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
 
     }
+    
+    @objc private func shareTapped() {
+        //Shows icons for AcivityViewController
+        guard let image = displayedImageView.image?.jpegData(compressionQuality: 0.8) else {
+            print("No Image found")
+            return
+        }
+        
+        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
+    }
+
 
 }
